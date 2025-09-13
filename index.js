@@ -6,9 +6,14 @@ export default function Chat() {
   const messagesEndRef = useRef(null);
 
   useEffect(() => {
-    fetch('/api/messages')
-      .then(res => res.json())
-      .then(data => setMessages(data));
+    const fetchMessages = () => {
+      fetch('/api/messages')
+        .then(res => res.json())
+        .then(data => setMessages(data));
+    };
+    fetchMessages();
+    const interval = setInterval(fetchMessages, 2000);
+    return () => clearInterval(interval);
   }, []);
 
   useEffect(() => {
