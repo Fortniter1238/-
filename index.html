@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Мой Веб‑чат</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">Веб‑чат</div>
+      <div class="user" id="userLabel">Гость</div>
+    </header>
+
+    <main class="chat" id="messages"></main>
+
+    <footer class="inputbar">
+      <input
+        id="nameInput"
+        class="name"
+        placeholder="Имя (необязательно)"
+        maxlength="24"
+      />
+      <input
+        id="msgInput"
+        class="msg"
+        placeholder="Введите сообщение…"
+        maxlength="500"
+      />
+      <button id="sendBtn" class="send">➤</button>
+    </footer>
+  </div>
+
+  <!-- Firebase SDK (модули) -->
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
