@@ -1,0 +1,101 @@
+:root {
+  --bg: #e5ddd5;
+  --paper: #ffffff;
+  --you: #dcf8c6;
+  --text: #111827;
+  --muted: #6b7280;
+  --accent: #25d366;
+  --bar: #f0f2f5;
+  --border: #d1d5db;
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Inter, Roboto, Arial;
+}
+
+.app {
+  max-width: 840px;
+  height: 100vh;
+  margin: 0 auto;
+  display: grid;
+  grid-template-rows: 56px 1fr 64px;
+  background: #d6dbd9 url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"/>' ) repeat;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  background: var(--bar);
+  border-bottom: 1px solid var(--border);
+}
+
+.brand { font-weight: 700; }
+.user { font-size: 14px; color: var(--muted); }
+
+.chat {
+  padding: 12px;
+  overflow-y: auto;
+  background: linear-gradient(180deg, #e5ddd5, #d7d2ca);
+}
+
+.bubble {
+  max-width: 70%;
+  margin: 6px 0;
+  padding: 8px 10px;
+  background: var(--paper);
+  border-radius: 10px;
+  line-height: 1.35;
+  box-shadow: 0 1px 0 rgba(0,0,0,.05);
+  position: relative;
+  word-wrap: break-word;
+}
+
+.bubble.you { background: var(--you); margin-left: auto; }
+.meta {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.author { font-weight: 600; color: #374151; }
+.time { opacity: .9; }
+
+.inputbar {
+  display: grid;
+  grid-template-columns: 160px 1fr 56px;
+  gap: 8px;
+  padding: 8px;
+  background: var(--bar);
+  border-top: 1px solid var(--border);
+}
+
+.name, .msg {
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  outline: none;
+  background: #fff;
+}
+
+.send {
+  border: none;
+  border-radius: 10px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+@media (max-width: 560px) {
+  .inputbar { grid-template-columns: 1fr 52px; }
+  .name { display: none; }
+}
