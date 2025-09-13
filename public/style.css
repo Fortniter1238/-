@@ -1,79 +1,89 @@
-/* Общие стили */
+/* Фон всего экрана */
 body {
   margin: 0;
-  font-family: 'Segoe UI', Roboto, sans-serif;
-  background: linear-gradient(135deg, #74ABE2, #5563DE);
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #1f1c2c, #928dab);
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
 }
 
-/* Контейнер чата */
+/* Контейнер чата с эффектом стекла */
 .chat-container {
   display: flex;
   flex-direction: column;
   height: 90vh;
   width: 100%;
   max-width: 500px;
-  background: #fff;
-  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  border: 1px solid rgba(255,255,255,0.2);
 }
 
 /* Шапка */
 header {
-  padding: 12px;
-  background: #5563DE;
-  color: white;
-  font-weight: bold;
+  padding: 14px;
+  background: rgba(255,255,255,0.1);
   display: flex;
   align-items: center;
+  gap: 8px;
 }
 
 header input {
   flex: 1;
-  padding: 8px;
+  padding: 10px;
   border: none;
-  border-radius: 8px;
+  border-radius: 12px;
   outline: none;
   font-size: 14px;
+  background: rgba(255,255,255,0.2);
+  color: white;
+}
+
+header input::placeholder {
+  color: rgba(255,255,255,0.7);
+}
+
+/* Зона сообщений */
+main {
+  flex: 1;
+  padding: 14px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 /* Сообщения */
-main {
-  flex: 1;
-  padding: 12px;
-  overflow-y: auto;
-  background: #f7f9fc;
-}
-
 .message {
   max-width: 80%;
   padding: 10px 14px;
-  margin: 6px 0;
-  border-radius: 12px;
+  border-radius: 16px;
   font-size: 14px;
   line-height: 1.4;
   animation: fadeIn 0.3s ease;
+  word-wrap: break-word;
 }
 
 .message strong {
   display: block;
   font-size: 12px;
-  color: #888;
+  opacity: 0.8;
   margin-bottom: 4px;
 }
 
 .message.other {
-  background: #fff;
-  border: 1px solid #ddd;
+  background: rgba(255,255,255,0.2);
+  color: white;
   align-self: flex-start;
 }
 
 .message:not(.other) {
-  background: #5563DE;
+  background: linear-gradient(135deg, #667eea, #764ba2);
   color: white;
   align-self: flex-end;
 }
@@ -81,33 +91,40 @@ main {
 /* Подвал */
 footer {
   display: flex;
-  padding: 10px;
-  background: #f0f0f0;
+  padding: 12px;
+  background: rgba(255,255,255,0.1);
+  gap: 8px;
 }
 
 footer input {
   flex: 1;
   padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
+  border-radius: 12px;
+  border: none;
   outline: none;
   font-size: 14px;
+  background: rgba(255,255,255,0.2);
+  color: white;
+}
+
+footer input::placeholder {
+  color: rgba(255,255,255,0.7);
 }
 
 footer button {
   padding: 0 16px;
-  margin-left: 8px;
-  background: #5563DE;
+  background: linear-gradient(135deg, #ff9966, #ff5e62);
   color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: 12px;
   font-size: 18px;
   cursor: pointer;
-  transition: background 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 footer button:hover {
-  background: #3f4bb8;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255,94,98,0.5);
 }
 
 /* Анимация появления */
