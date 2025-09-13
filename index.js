@@ -23,7 +23,7 @@ export default function Home() {
   return (
     <div style={{ maxWidth: 600, margin: "0 auto", padding: 20 }}>
       <h1>Chotogram</h1>
-      <div style={{ border: "1px solid #ccc", padding: 10, minHeight: 300, marginBottom: 10 }}>
+      <div style={{ border: "1px solid #ccc", padding: 10, minHeight: 300, marginBottom: 10, overflowY: "auto" }}>
         {messages.map((msg, i) => (
           <div key={i}>{msg}</div>
         ))}
