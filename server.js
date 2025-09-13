@@ -1,9 +1,8 @@
-app.use(express.static("public"));
 const express = require("express");
 const http = require("http");
 const { Server } = require("socket.io");
 
-const app = express();
+const app = express(); // ← создаём app сразу
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: { origin: "*" }
@@ -19,10 +18,8 @@ let messages = [];
 io.on("connection", (socket) => {
   console.log("Пользователь подключился:", socket.id);
 
-  // Отправляем историю сообщений
   socket.emit("init", messages);
 
-  // Получаем новое сообщение
   socket.on("message", (msg) => {
     const newMsg = {
       text: msg.text,
