@@ -11,12 +11,9 @@ body {
   max-width: 600px;
   margin: auto;
   background: #fff;
-  border: 1px solid #ccc;
 }
 
 header {
-  display: flex;
-  justify-content: space-between;
   padding: 10px;
   background: #f0f0f0;
 }
