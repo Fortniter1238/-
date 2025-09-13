@@ -1,17 +1,15 @@
 const express = require("express");
 const http = require("http");
 const { Server } = require("socket.io");
-const fetch = require("node-fetch");
 
 // Токен твоего бота
-const TELEGRAM_TOKEN = "ТОКЕН_БОТА";
+const TELEGRAM_TOKEN = "6125133441:AAGNesWT9frmL49ZmZZ6yXRP8-Rf0HxxqAU";
 
 // Список chat_id, которые ты получил
 const TELEGRAM_CHAT_IDS = [
   948828396,    // myhaas
   5047602825,   // Artemovskiyy
   1344703209    // Nazerrro
-  // Если появятся новые — просто добавь сюда
 ];
 
 const app = express();
