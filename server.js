@@ -1,28 +1,33 @@
 const express = require("express");
 const http = require("http");
 const { Server } = require("socket.io");
+const fetch = require("node-fetch");
+
+// Токен твоего бота
+const TELEGRAM_TOKEN = "ТОКЕН_БОТА";
+
+// Список chat_id, которые ты получил
+const TELEGRAM_CHAT_IDS = [
+  948828396,    // myhaas
+  5047602825,   // Artemovskiyy
+  1344703209    // Nazerrro
+  // Если появятся новые — просто добавь сюда
+];
 
 const app = express();
 const server = http.createServer(app);
-const io = new Server(server, {
-  cors: { origin: "*" }
-});
+const io = new Server(server, { cors: { origin: "*" } });
 
-// Отдаём статические файлы из папки public
 app.use(express.static("public"));
 
-// Хранилище сообщений в памяти
 let messages = [];
 
-// Обработка подключений
 io.on("connection", (socket) => {
   console.log("Пользователь подключился:", socket.id);
 
-  // Отправляем историю сообщений новому пользователю
   socket.emit("init", messages);
 
-  // Получаем новое сообщение
-  socket.on("message", (msg) => {
+  socket.on("message", async (msg) => {
     const newMsg = {
       text: msg.text,
       user: msg.user || "Гость",
@@ -30,6 +35,22 @@ io.on("connection", (socket) => {
     };
     messages.push(newMsg);
     io.emit("message", newMsg);
+
+    // Отправляем в Telegram всем chat_id
+    for (const chatId of TELEGRAM_CHAT_IDS) {
+      try {
+        await fetch(`https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            chat_id: chatId,
+            text: `💬 ${newMsg.user}: ${newMsg.text}`
+          })
+        });
+      } catch (err) {
+        console.error("Ошибка отправки в Telegram:", err);
+      }
+    }
   });
 
   socket.on("disconnect", () => {
@@ -37,6 +58,5 @@ io.on("connection", (socket) => {
   });
 });
 
-// Render передаёт порт через переменную окружения
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => console.log(`Сервер запущен на порту ${PORT}`));
