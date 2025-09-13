@@ -1,15 +1,26 @@
-let messages = [];
+import { supabase } from '../../lib/supabaseClient';
 
-export default function handler(req, res) {
+export default async function handler(req, res) {
   if (req.method === 'GET') {
-    res.status(200).json(messages);
+    const { data, error } = await supabase
+      .from('messages')
+      .select('*')
+      .order('created_at', { ascending: true });
+    if (error) return res.status(500).json({ error: error.message });
+    res.status(200).json(data || []);
   } else if (req.method === 'POST') {
     const { text } = req.body;
     if (typeof text === 'string' && text.trim()) {
-      messages.push({ text });
-      if (messages.length > 100) messages = messages.slice(-100);
+      const { error } = await supabase
+        .from('messages')
+        .insert([{ text }]);
+      if (error) return res.status(500).json({ error: error.message });
     }
-    res.status(200).json(messages);
+    const { data } = await supabase
+      .from('messages')
+      .select('*')
+      .order('created_at', { ascending: true });
+    res.status(200).json(data || []);
   } else {
     res.status(405).end();
   }
