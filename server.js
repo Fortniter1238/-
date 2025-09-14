@@ -9,7 +9,8 @@ const TELEGRAM_TOKEN = "6125133441:AAGNesWT9frmL49ZmZZ6yXRP8-Rf0HxxqAU";
 const TELEGRAM_CHAT_IDS = [
   948828396,    // myhaas
   5047602825,   // Artemovskiyy
-  1344703209    // Nazerrro
+  1344703209,   // Nazerrro
+  5801830916,   // Ur0l04ist
 ];
 
 const app = express();
